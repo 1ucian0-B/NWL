@@ -1,24 +1,30 @@
 import React from 'react';
-
-interface TitleProps {
-  text: string;
-}
-
-function Title(props: TitleProps) {
-  return (
-    <h1>{props.text}</h1>
-  )
-}
-
+import './Styles/global.css';
+import logoImg from './Images/Logo.svg';
+import './Styles/Pages/landing.css';
 
 
 function App() {
   return (
-    <div className="App">
-      <Title text="Titulo 1"></Title>
-      <Title text="Titulo 2"></Title>
-      <Title text="Titulo 3"></Title>
-      <Title text="Titulo 4"></Title>
+    <div id="page-landing">
+      <div className="content-wrapper">
+        <img src={logoImg} alt=" Happy" />
+
+        <main>
+          <h1>Leve felicidade para o mundo</h1>
+          <p>Vesite orfanatos e mude o dia de muitas crianças.</p>
+        </main>
+
+        <div className="location">
+          <strong>Rio do Sul</strong>
+          <span>Guarda</span>
+        </div>
+
+        <a href="" className="enter-app">
+
+          >
+        </a>
+      </div>
     </div>
   );
 }

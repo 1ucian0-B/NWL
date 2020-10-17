@@ -1,0 +1,14 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body{
+  color:#FFF;
+  background:#3ab8ee;
+}
+
+body, input, button,textarea{
+  font: 600 18px Nunito, sans-serif;
+}
