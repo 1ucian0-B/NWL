@@ -3,21 +3,12 @@ import { Link } from 'react-router-dom';
 import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import Leaflet from 'leaflet';
+
 
 import mapMarkerImg from '../Images/Local.svg';
 import '../Styles/Pages/orphanages-map.css';
+import MapIcon from '../utils/mapIcon';
 
-
-
-const mapIcon = Leaflet.icon({
-
-  iconUrl: mapMarkerImg,
-  iconSize: [50, 60],
-  iconAnchor: [25, 60],
-  popupAnchor: [170, 2],
-
-})
 
 
 function OrphanagesMap() {
@@ -47,7 +38,7 @@ function OrphanagesMap() {
         />
 
         <Marker
-          icon={mapIcon}
+          icon={MapIcon}
           position={[40.5462125, -7.3450345]}
 
         >
