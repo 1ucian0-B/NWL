@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-
-
 import mapMarkerImg from '../Images/Local.svg';
 import '../Styles/Pages/orphanages-map.css';
 import MapIcon from '../utils/mapIcon';
+import api from '../service/api';
 
+
+interface Orphanage {
+
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
 
 
 function OrphanagesMap() {
+
+  const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+  console.log(orphanages);
+
+  useEffect(() => {
+    api.get('orphanages').then(response => {
+      setOrphanages(response.data);
+    })
+  }, []);
+
+
   return (
     <div id="page-map">
       <aside>
@@ -37,22 +54,25 @@ function OrphanagesMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <Marker
-          icon={MapIcon}
-          position={[40.5462125, -7.3450345]}
+        {orphanages.map(orphanage => {
+          return (
+            <Marker
+              key={orphanage.id}
+              icon={MapIcon}
+              position={[orphanage.latitude, orphanage.longitude]}
+            >
 
-        >
-
-          <Popup closeButton={false} minWidth={240} maxwidth={240} className="map-popup">
-            Lar das meninas
-            <Link to="/orphanage/1">
-              <FiArrowRight size={20} color="FFF" />
-
-            </Link>
-          </Popup>
-
-        </Marker>
+              <Popup closeButton={false} minWidth={240} maxwidth={240} className="map-popup">
+                {orphanage.name}
+                <Link to={`/orphanage/${orphanage.id}`}>
+                  <FiArrowRight size={20} color="FFF" />
+                </Link>
+              </Popup>
+            </Marker>
+          )
+        })}
       </Map>
+
 
       <Link to="/orphanage/create" className="create-orphanage">
         <FiPlus size={32} color="#FFF" />
